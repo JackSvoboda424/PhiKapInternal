@@ -1,0 +1,99 @@
+﻿@model List<PhiKapInternal.Models.PKT_Internal.Member>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search for names.." title="Type in a name">
+
+<table class="table" id="membersTable">
+     <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Password
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Class
+            </th>
+            <th>
+                Position
+            </th>
+            <th>
+                Room
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead> 
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Class)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Room)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                        <i class="bi bi-pencil-square text-primary"></i>
+                    </a>
+                    |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Details">
+                        <i class="bi bi-info-circle text-info"></i>
+                    </a>
+                    |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                        <i class="bi bi-trash text-danger"></i>
+                    </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+<script>
+    function searchTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("membersTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

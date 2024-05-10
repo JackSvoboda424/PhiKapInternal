@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PhiKapInternal</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="icon" href="~/images/Phi_Kappa_Theta_crest.png" type="image/x-icon" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PhiKapInternal.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="header">
+        <a asp-controller="Home" asp-action="Index"><img src="~/images/Phi_Kappa_Theta_crest.png" alt="Icon" class="header-icon"></a>
+        <div class="dropdown" data-dropdown>
+            <button class="link" data-dropdown-button>Who We Are</button>
+            <div class="dropdown-menu information-grid">
+                <div>
+                    <div class="dropdown-heading">Our 5 Pilliars</div>
+                    <div class="dropdown-links">
+                        <a class="link" asp-area="" asp-controller="Pillars" asp-action="Leadership">Leadership</a>
+                        <a class="link" asp-area="" asp-controller="Pillars" asp-action="Fraternal">Fraternal</a>
+                        <a class="link" asp-area="" asp-controller="Pillars" asp-action="Spiritual">Spiritual</a>
+                        <a class="link" asp-area="" asp-controller="Pillars" asp-action="Social">Social</a>
+                        <a class="link" asp-area="" asp-controller="Pillars" asp-action="Intellectual">Intellectual</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="dropdown-heading">Our History</div>
+                    <div class="dropdown-links">
+                        <a class="link" asp-area="" asp-controller="Home" asp-action="NationalHistory">National History</a>
+                        <a class="link" asp-area="" asp-controller="Home" asp-action="ChapterHistory">Chapter History</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="dropdown-heading">Our Executive Officers</div>
+                    <div class="dropdown-links">
+                        <a href="#" class="link">President</a>
+                        <a href="#" class="link">Risk Manager</a>
+                        <a href="#" class="link">Leadership Chair</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown" data-dropdown>
+            <button class="link" data-dropdown-button>Recruitment</button>
+            <div class="dropdown-menu information-grid">
+                <div>
+                    <div class="dropdown-links">
+                        <a href="#" class="link">Our Recruitment Chairs</a>
+                        <a href="#" class="link">Interest Form</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (Context.Session.GetString("IsLoggedIn") == "Yes")
+        {
+            <a href="#" class="link">Fine Sheet</a>
+            <a asp-controller="StudyHourEntries" asp-action="Index">Study Hours</a>
+            <a asp-controller="Members" asp-action="Index">Members</a>
+            
+        }
+        <div class="right-content">
+            @if (Context.Session.GetString("IsLoggedIn") != "Yes") 
+            {
+                <div class="dropdown" data-dropdown>
+                    <button class="link" data-dropdown-button>Login</button>
+                    <div class="dropdown-menu normal-content right-menu">
+                        <form class="login-form" asp-controller="Home" asp-action="Login" method="post">
+                            <label for="name">Name</label>
+                            <input name="name" class="form-control" id="usernameInput" required />
+                            <label for="password">Password</label>
+                            <input name="password" class="form-control" id="passwordInput" required />
+                            <input type="submit" value="Login" class="btn btn-primary" />
+                        </form>
+                    </div>
+                </div>
+            }
+            else 
+            {
+                <a class="link" asp-area="" asp-controller="Home" asp-action="Logout" title="Logout"><i class="bi bi-box-arrow-right" style="font-size: 1.5rem;"></i></a>
+                <a asp-area="" asp-controller="Home" asp-action="ViewProfile" style="margin-left:1rem" title="@Context.Session.GetString("User")"><i class="bi bi-person" style="font-size: 1.5rem;"></i></a>
+            }
+        </div>
+    </div>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer fixed-bottom">
+        <div>
+            <img src="/images/give_expecting_nothing.png" />
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

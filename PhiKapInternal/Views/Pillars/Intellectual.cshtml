@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "Intellectual";
+}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="background-pillars">
+    <div class="text-center title-pillars">
+        <h1 class="display-4"><em>The <strong style="color:rgb(128,0,0)">Intellectual</strong> Pillar</em>.</h1>
+    </div>
+    <div class="container-pillars" >
+        <div class="pillar-card">
+            <div class="pillar-icon">
+                <i class="bi bi-book"></i>
+            </div>
+            <h3 class="title">Intellectual</h3>
+            <p>Our individual pursuit of education is what has brought us together. Education enables and empowers us to face what lies ahead. Our fraternity strives to equip each member with the tools and preparation he needs to develop intellectually and succeed academically.</p>
+            <p>Phi Kappa Theta attracts intellectually motivated men who share a passion for lifelong knowledge, learning and development. Our house exceeds retention rates, average GPAs and graduation rates of our host institutions by providing an intellectually stimulating environment and consistent standards of academic performance. Phi Kappa Theta challenges members to maximize their lifelong personal and professional development.</p>
+            <p>Our fraternity tangibly equips its members for academic success through a culture of academic excellence and a wealth of connections and mentors within the house. We have men in a wide variety of fields of study: odds are, if you need help in a class, someone older than you has already been through it and is eager to help.</p>
+        </div>
+        <div class="pillar-card">
+            <h1 class="display-4 title">What the men of our house study.</h1>
+            <div style="width:500px;">
+                <canvas id="collegeChart"></canvas>
+            </div>
+            <h1 class="title"><em>Over 60% of our members have above a <strong style="color:rgb(128,0,0)">3.5 GPA</strong></em>.</h1>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Count occurrences of each college
+    const collegeCounts = {
+        "Arts and Sciences": 13,
+        "Engineering": 22,
+        "Fine and Performing Arts": 5,
+        "Business Administration": 26,
+        "Education and Human Sciences": 14,
+        "Journalism and Mass Communications": 3,
+        "Agricultural Sciences and Natural Resources": 7,
+        "Architecture": 3,
+        "Public Affairs": 1
+    };
+
+    // Extract labels and data for the chart
+    const labels = Object.keys(collegeCounts);
+    const data = Object.values(collegeCounts);
+
+    // Create a pie chart
+    const ctx = document.getElementById('collegeChart').getContext('2d');
+    const myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                backgroundColor: [
+                    'rgba(0, 123, 255, 0.7)', // Blue
+                    'rgba(52, 58, 64, 0.7)',   // Dark Gray
+                    'rgba(23, 162, 184, 0.7)', // Teal
+                    'rgba(0, 206, 201, 0.7)',  // Aqua
+                    'rgba(40, 167, 69, 0.7)',  // Green
+                    'rgba(108, 117, 125, 0.7)',// Gray
+                    'rgba(255, 193, 7, 0.7)',  // Yellow
+                    'rgba(220, 53, 69, 0.7)',   // Red
+                    'rgba(255, 159, 64, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(0, 123, 255, 0.7)', // Blue
+                    'rgba(52, 58, 64, 0.7)',   // Dark Gray
+                    'rgba(23, 162, 184, 0.7)', // Teal
+                    'rgba(0, 206, 201, 0.7)',  // Aqua
+                    'rgba(40, 167, 69, 0.7)',  // Green
+                    'rgba(108, 117, 125, 0.7)',// Gray
+                    'rgba(255, 193, 7, 0.7)',  // Yellow
+                    'rgba(220, 53, 69, 0.7)',   // Red
+                    'rgba(255, 159, 64, 0.7)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Fraternity College Distribution'
+            }
+        }
+    });
+</script>
